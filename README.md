@@ -1,3 +1,8 @@
+# Mythology App CMS
+
+
+ ## Started with electron-react-boilerplate 
+
 # electron-react-boilerplate
 
 [![Build Status][travis-image]][travis-url]

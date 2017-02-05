@@ -9,8 +9,11 @@ export default class Home extends Component {
     return (
       <div>
         <div className={styles.container}>
-          <h2>Home</h2>
-          <Link to="/counter">to Counter</Link>
+          <h2>Greek Mythology Management System</h2>
+          <div>
+            <p>Menu: </p>
+          <Link to="/figures">Figure list</Link>
+          </div>
         </div>
       </div>
     );

@@ -1,10 +1,16 @@
 // @flow
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAllGreeks } from '../actions/figures';
 
-export default class App extends Component {
+class App extends Component {
   props: {
     children: HTMLElement
   };
+
+  componentWillMount() {
+    this.props.fetchAllGreeks();
+  }
 
   render() {
     return (
@@ -14,3 +20,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(null, { fetchAllGreeks })(App);

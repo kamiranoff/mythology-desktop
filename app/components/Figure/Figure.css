@@ -1,0 +1,14 @@
+.figureLinkContainer{
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-top: 0;
+  padding-top:0;
+}
+
+
+.figureLabel {
+  text-align: right;
+  font-size: 1rem;
+}

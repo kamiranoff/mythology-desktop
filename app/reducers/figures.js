@@ -11,6 +11,7 @@ const initialState = {
   figures: [],
   loading: true,
   error: '',
+  figure: {},
 };
 
 export default (state = initialState, action) => {

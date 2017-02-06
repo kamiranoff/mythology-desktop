@@ -5,6 +5,7 @@ import {
   RECEIVE_ALL_GREEKS_FAILURE,
   REQUEST_FIGURE,
   RECEIVE_FIGURE,
+  RECEIVE_FIGURE_FAILURE,
   TRIGGER_EDIT_MODE,
 } from '../constants/actions';
 import getEnvironment from '../constants/environment';
@@ -60,12 +61,24 @@ const receiveFigure = figure => {
   };
 };
 
+
+const receiveFigureFailed = e => ({
+  type: RECEIVE_FIGURE_FAILURE,
+  error: e,
+});
+
+
 export function getFigure(figureId) {
   return dispatch => {
     dispatch(requestFigure());
-    return callApi(`${ENV.API.GREEKS}/${figureId}`).then(figure => {
-      dispatch(receiveFigure(figure));
-    });
+    return callApi(`${ENV.API.GREEKS}/${figureId}`)
+      .then((response) => {
+        if (response.error) {
+          dispatch(receiveFigureFailed(response.error));
+        } else {
+          dispatch(receiveFigure(response));
+        }
+      });
   };
 }
 

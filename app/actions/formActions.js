@@ -3,9 +3,14 @@ import callApi from '../utils/apiCaller';
 import {
   REQUEST_FIGURE_UPDATE,
   RECEIVE_FIGURE_UPDATE,
+  RECEIVE_FIGURE_UPDATE_FAILURE,
 } from '../constants/actions';
 
 import { FIGURES } from '../constants/environment';
+
+import getEnvironment from '../constants/environment';
+
+const ENV = getEnvironment();
 
 const requestFigureUpdate = () => {
   return {
@@ -20,12 +25,26 @@ const receiveFigureUpdate = figure => {
   };
 };
 
+const receiveFigureUpdateFailure = error => {
+  return {
+    type: RECEIVE_FIGURE_UPDATE_FAILURE,
+    error,
+  };
+};
+
 export function updateFigure(figure) {
-  const figureId = figure.figureId;
+  const figureId = figure._id;
+  console.log('figureId', figureId);
   return dispatch => {
     dispatch(requestFigureUpdate());
-    return callApi(`${FIGURES}/${figureId}`, 'PUT', figure).then(updatedFigure => {
-      dispatch(receiveFigureUpdate(updatedFigure));
+    return callApi(`${ENV.API.GREEKS}/${figureId}`, 'PATCH', undefined , figure).then(updatedFigure => {
+      console.log(updatedFigure);
+      if (updatedFigure.error) {
+        dispatch(receiveFigureUpdateFailure(updatedFigure.error));
+      } else {
+        dispatch(receiveFigureUpdate(updatedFigure));
+
+      }
     });
   };
 }

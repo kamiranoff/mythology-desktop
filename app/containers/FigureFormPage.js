@@ -50,9 +50,10 @@ class FigureFormContainer extends Component {
   validateForm(data) {
     const err = {};
     const sanitizedForm = {};
-
     Object.keys(data).forEach((key) => {
+
       let newData = data[key];
+
       if (key === FIELDS.NAME && data[key] === '') {
         err.error = 'title field shoud not be empty';
       }
@@ -62,7 +63,16 @@ class FigureFormContainer extends Component {
         newData = data[key].replace(/(?:\r\n|\r|\n)/g, '<br />');
       }
 
-      sanitizedForm[key] = DOMPurify.sanitize(newData);
+
+
+      if (typeof newData === 'string') {
+        sanitizedForm[key] = DOMPurify.sanitize(newData);
+      }
+
+      if(!newData.length > 0 ) {
+        delete sanitizedForm[key];
+      }
+
     });
 
     if (err.error) {
@@ -82,6 +92,7 @@ class FigureFormContainer extends Component {
     const figureData = this.state.figure;
     const result = this.validateForm(figureData);
 
+    console.log(result);
     if (result.error) {
       this.setState({ err: result.error });
     } else {

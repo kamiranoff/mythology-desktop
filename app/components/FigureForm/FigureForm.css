@@ -1,4 +1,22 @@
 label {
   display: block;
   margin: 1rem;
+
+}
+
+input {
+  width: 80%;
+}
+
+
+.FigureForm__submitBtn {
+  margin: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.FigureForm__submitBtnContainer {
+  text-align: center;
 }

@@ -7,9 +7,9 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
       className={styles.FigureForm}
       onSubmit={(event) => handleSubmit(event)}
     >
-      <h3>Edit Mode</h3>
+      <h3>Edit Mode: {figure._id}</h3>
       <label>
-        <p>title</p>
+        <p>Name</p>
         <input
           onChange={(event) => handleChange(event)}
           name="name"
@@ -36,6 +36,24 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
         />
       </label>
       <label>
+        <p>Thumbnail Image</p>
+        <input
+          onChange={(event) => handleChange(event)}
+          name="thumbnailImage"
+          placeholder="Thumbnail"
+          value={figure.images.thumbnail}
+        />
+      </label>
+      <label>
+        <p>Regular Image</p>
+        <input
+          onChange={(event) => handleChange(event)}
+          name="regularImage"
+          placeholder="Regular"
+          value={figure.images.regular}
+        />
+      </label>
+      <label>
         <p>Category</p>
         <input
           onChange={(event) => handleChange(event)}
@@ -54,6 +72,15 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
         />
       </label>
       <label>
+        <p>Gender</p>
+        <input
+          onChange={(event) => handleChange(event)}
+          name="gender"
+          placeholder="Gender"
+          value={figure.gender}
+        />
+      </label>
+      <label>
         <p>Description</p>
         <textarea
           onChange={(event) => handleChange(event)}
@@ -65,12 +92,14 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
         />
       </label>
       <p>{error}</p>
-      <button className={styles.FigureForm__submitBtn} type="submit">
-        Submit
-      </button>
+      <div className={styles.FigureForm__submitBtnContainer}>
+        <button className={styles.FigureForm__submitBtn} type="submit">
+          Submit
+        </button>
+      </div>
     </form>
   );
-}
+};
 
 FigureForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,

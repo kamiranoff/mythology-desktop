@@ -29,7 +29,6 @@ class FigureFormContainer extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
@@ -62,7 +61,7 @@ class FigureFormContainer extends Component {
 
       if (key === FIELDS.DESCRIPTION) {
         // replace line break with <br/>
-        newData = data[key].replace(/(?:\r\n|\r|\n)/g, '<br />');
+       //newData = data[key].replace(/(?:\r\n|\r|\n)/g, '<br />');
         newData = newData.replace(/\[.*?\]/g, "");
       }
 

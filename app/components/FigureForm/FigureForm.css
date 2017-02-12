@@ -8,6 +8,10 @@ input {
   width: 80%;
 }
 
+textarea {
+  font-size: 18px;
+  line-height: 20px;
+}
 
 .FigureForm__submitBtn {
   margin: 2rem;

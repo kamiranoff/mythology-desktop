@@ -88,8 +88,8 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
           onChange={(event) => handleChange(event)}
           name="description"
           placeholder="Description"
-          cols="60"
-          rows="60"
+          cols="120"
+          rows="40"
           value={figure.description}
         />
       </label>

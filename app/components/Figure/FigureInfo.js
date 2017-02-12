@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import styles from './Figure.css';
 
+const createMarkup = (desc) => { return {__html: desc}; };
+
 const FigureInfo = ({figure}) => (
   <article className={styles.Figure}>
     <h1>
@@ -10,7 +12,10 @@ const FigureInfo = ({figure}) => (
     <p><span className={styles.entryName}>Greek Name</span>{figure.greekName}</p>
     <p><span className={styles.entryName}>Roman Name</span>{figure.romanName}</p>
     <p><span className={styles.entryName}>Category</span>{figure.category}</p>
-    <p><span className={styles.entryName}>Description</span>{figure.description}</p>
+    <div>
+      <span className={styles.entryName}>Description</span>
+      <div dangerouslySetInnerHTML={createMarkup(figure.description)} />
+  </div>
     <p><span className={styles.entryName}>Immortal</span>{figure.immortal}</p>
     <p><span className={styles.entryName}>Gender</span>{figure.gender}</p>
     <p>

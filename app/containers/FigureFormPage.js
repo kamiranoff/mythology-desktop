@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import DOMPurify from 'dompurify';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import FigureForm from '../components/FigureForm/FigureForm';
 import { updateFigure } from '../actions/formActions';
 
@@ -13,8 +14,10 @@ const FIELDS = {
   DESCRIPTION: 'description',
   IMMORTAL: 'immortal',
   GENDER: 'gender',
-  IMAGE_THUMBNAIL: 'imageThumbnail',
-  IMAGE_REGULAR: 'imageRegular',
+  IMAGE: {
+    THUMBNAIL: 'thumbnail',
+    REGULAR: 'regular',
+  },
   FATHER: 'father',
   MOTHER: 'mother',
   CHILDREN: 'children',
@@ -51,7 +54,6 @@ class FigureFormContainer extends Component {
     const err = {};
     const sanitizedForm = {};
     Object.keys(data).forEach((key) => {
-
       let newData = data[key];
 
       if (key === FIELDS.NAME && data[key] === '') {
@@ -61,18 +63,28 @@ class FigureFormContainer extends Component {
       if (key === FIELDS.DESCRIPTION) {
         // replace line break with <br/>
         newData = data[key].replace(/(?:\r\n|\r|\n)/g, '<br />');
+        newData = newData.replace(/\[.*?\]/g, "");
       }
-
-
 
       if (typeof newData === 'string') {
         sanitizedForm[key] = DOMPurify.sanitize(newData);
       }
 
-      if(!newData.length > 0 ) {
-        delete sanitizedForm[key];
+      if (typeof newData === 'object' && !_.isEmpty(newData)) {
+        for (const key of Object.keys(newData)) {
+          if (typeof key === 'string' && !newData[key].length > 0) {
+            delete newData[key];
+          }
+        }
+        sanitizedForm[key] = newData;
       }
 
+      if (
+        (typeof newData === 'string' && !newData.length > 0) ||
+        _.isEmpty(newData)) {
+        console.log(newData, key);
+        delete sanitizedForm[key];
+      }
     });
 
     if (err.error) {
@@ -83,8 +95,16 @@ class FigureFormContainer extends Component {
   }
 
   handleChange(event) {
-    this.state.figure[event.target.name] = event.target.value;
-    this.setState({ figure: this.state.figure });
+    const value = event.target.value;
+    const name = event.target.name;
+    if (name === FIELDS.IMAGE.REGULAR || name === FIELDS.IMAGE.THUMBNAIL) {
+      this.state.figure.images[name] = value;
+    } else {
+      this.state.figure[name] = value;
+    }
+    this.setState({ figure: this.state.figure }, () => {
+      console.log(this.state.figure);
+    });
   }
 
   handleSubmit(event) {
@@ -92,7 +112,6 @@ class FigureFormContainer extends Component {
     const figureData = this.state.figure;
     const result = this.validateForm(figureData);
 
-    console.log(result);
     if (result.error) {
       this.setState({ err: result.error });
     } else {

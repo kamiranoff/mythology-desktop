@@ -5,6 +5,7 @@ import {
   TRIGGER_EDIT_MODE,
   REQUEST_FIGURE,
   RECEIVE_FIGURE,
+  RECEIVE_FIGURE_UPDATE,
 } from '../constants/actions';
 
 const initialState = {
@@ -46,6 +47,13 @@ export default (state = initialState, action) => {
         ...state,
         figure: action.figure,
       };
+
+    case RECEIVE_FIGURE_UPDATE:
+      return {
+        ...state,
+        figure: action.figure,
+      };
+
 
     case TRIGGER_EDIT_MODE:
       return {

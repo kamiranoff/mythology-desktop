@@ -39,20 +39,22 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
         <p>Thumbnail Image</p>
         <input
           onChange={(event) => handleChange(event)}
-          name="thumbnailImage"
+          name="thumbnail"
           placeholder="Thumbnail"
           value={figure.images.thumbnail}
         />
       </label>
+      <img src={figure.images.thumbnail} width="150" height="150" />
       <label>
         <p>Regular Image</p>
         <input
           onChange={(event) => handleChange(event)}
-          name="regularImage"
+          name="regular"
           placeholder="Regular"
           value={figure.images.regular}
         />
       </label>
+      <img src={figure.images.regular} width="300" height="150" />
       <label>
         <p>Category</p>
         <input
@@ -86,11 +88,14 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
           onChange={(event) => handleChange(event)}
           name="description"
           placeholder="Description"
-          cols="160"
+          cols="60"
           rows="60"
           value={figure.description}
         />
       </label>
+      <div
+        dangerouslySetInnerHTML={{__html:figure.description.replace(/(?:\r\n|\r|\n)/g, '<br />')}}
+        />
       <p>{error}</p>
       <div className={styles.FigureForm__submitBtnContainer}>
         <button className={styles.FigureForm__submitBtn} type="submit">

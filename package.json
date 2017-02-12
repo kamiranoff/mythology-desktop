@@ -164,6 +164,7 @@
     "dompurify": "^0.8.4",
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
+    "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",

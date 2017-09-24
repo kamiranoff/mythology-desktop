@@ -6,7 +6,6 @@ import { getFigure, triggerEditMode } from '../actions/figures';
 
 class FigurePage extends Component {
   componentWillMount() {
-    console.log(this.props);
     this.props.getFigure(this.props.params.id);
     this.handleUpdateClick = this.handleUpdateClick.bind(this);
   }

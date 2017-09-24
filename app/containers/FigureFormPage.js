@@ -84,7 +84,6 @@ class FigureFormContainer extends Component {
       if (
         (typeof newData === 'string' && !newData.length > 0) ||
         _.isEmpty(newData)) {
-        console.log(newData, key);
         delete sanitizedForm[key];
       }
     });

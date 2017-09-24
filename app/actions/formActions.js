@@ -32,7 +32,6 @@ const receiveFigureUpdateFailure = error => {
 
 export function updateFigure(figure) {
   const figureId = figure._id;
-  console.log('figureId', figure);
   return dispatch => {
     dispatch(requestFigureUpdate());
     return callApi(`${ENV.API.GREEKS}/${figureId}`, 'PATCH', undefined , figure).then(updatedFigure => {

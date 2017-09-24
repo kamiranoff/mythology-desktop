@@ -16,6 +16,10 @@ const FigureInfo = ({figure}) => (
       <span className={styles.entryName}>Description</span>
       <div dangerouslySetInnerHTML={createMarkup(figure.description)} />
   </div>
+    <div>
+      <span className={styles.entryName}>Short Description</span>
+      <div dangerouslySetInnerHTML={createMarkup(figure.shortDescription)} />
+    </div>
     <p><span className={styles.entryName}>Immortal</span>{figure.immortal}</p>
     <p><span className={styles.entryName}>Gender</span>{figure.gender}</p>
     <p>

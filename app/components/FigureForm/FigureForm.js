@@ -83,6 +83,17 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
         />
       </label>
       <label>
+        <p>Short Description</p>
+        <textarea
+          onChange={(event) => handleChange(event)}
+          name="shortDescription"
+          placeholder="Description"
+          cols="60"
+          rows="20"
+          value={figure.shortDescription}
+        />
+      </label>
+      <label>
         <p>Description</p>
         <textarea
           onChange={(event) => handleChange(event)}
@@ -93,9 +104,29 @@ const FigureForm = ({ handleSubmit, handleChange, figure, error }) => {
           value={figure.description}
         />
       </label>
+
       <div
         dangerouslySetInnerHTML={{__html:figure.description.replace(/(?:\r\n|\r|\n)/g, '<br />')}}
         />
+      <h3>Relatives</h3>
+      <label>
+        <p>Father</p>
+        <input
+          onChange={(event) => handleChange(event)}
+          name="father"
+          placeholder="Father"
+          value={figure.relatives.father}
+        />
+      </label>
+      <label>
+        <p>Mother</p>
+        <input
+          onChange={(event) => handleChange(event)}
+          name="mother"
+          placeholder="Mother"
+          value={figure.relatives.mother}
+        />
+      </label>
       <p>{error}</p>
       <div className={styles.FigureForm__submitBtnContainer}>
         <button className={styles.FigureForm__submitBtn} type="submit">

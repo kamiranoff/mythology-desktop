@@ -12,14 +12,17 @@ const FIELDS = {
   ROMAN_NAME: 'romanName',
   CATEGORY: 'category',
   DESCRIPTION: 'description',
+  SHORT_DESCRIPTION: 'shortDescription',
   IMMORTAL: 'immortal',
   GENDER: 'gender',
   IMAGE: {
     THUMBNAIL: 'thumbnail',
     REGULAR: 'regular',
   },
-  FATHER: 'father',
-  MOTHER: 'mother',
+  RELATIVES: {
+    FATHER: 'father',
+    MOTHER: 'mother',
+  },
   CHILDREN: 'children',
   BOOKS: 'books',
   EVENTS: 'events',
@@ -61,7 +64,7 @@ class FigureFormContainer extends Component {
 
       if (key === FIELDS.DESCRIPTION) {
         // replace line break with <br/>
-       //newData = data[key].replace(/(?:\r\n|\r|\n)/g, '<br />');
+        //newData = data[key].replace(/(?:\r\n|\r|\n)/g, '<br />');
         newData = newData.replace(/\[.*?\]/g, "");
       }
 
@@ -98,6 +101,8 @@ class FigureFormContainer extends Component {
     const name = event.target.name;
     if (name === FIELDS.IMAGE.REGULAR || name === FIELDS.IMAGE.THUMBNAIL) {
       this.state.figure.images[name] = value;
+    } else if (name === FIELDS.RELATIVES.FATHER || name === FIELDS.RELATIVES.MOTHER) {
+      this.state.figure.relatives[name] = value;
     } else {
       this.state.figure[name] = value;
     }

@@ -6,8 +6,6 @@ import {
   RECEIVE_FIGURE_UPDATE_FAILURE,
 } from '../constants/actions';
 
-import { FIGURES } from '../constants/environment';
-
 import getEnvironment from '../constants/environment';
 
 const ENV = getEnvironment();
